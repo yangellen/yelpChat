@@ -21,14 +21,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        
+
+      // Add event listener for when user login
+      NotificationCenter.default.addObserver(forName: NSNotification.Name("login"), object: nil, queue: OperationQueue.main) { (Notification) in
+         print("Login notification received")
+         //Load and show login view controller
+         self.login()
+      }
     
         // Add event listener for when user logs out
-
-        
-        // Add event listener for when user logs out
-
-        
+      NotificationCenter.default.addObserver(forName: NSNotification.Name("logout"), object: nil, queue: OperationQueue.main) { (Notification) in
+         print("Logout notification received")
+         //Load and show login view controller
+         self.logout()
+      }
         // Add User persistance across app restarts
 
 
@@ -36,12 +42,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     
-    // ––––– Lab 5 TODO: LOGIN USER
+    //LOGIN USER
+   func login(){
+      let storyboard = UIStoryboard(name: "Main", bundle:nil)
+      //view controller currently being set in storyboard as default will be overridden
+      window?.rootViewController = storyboard.instantiateViewController(identifier: "TabBar")
+   }
 
     
-    // ––––– Lab 5 TODO: LOGOUT USER
-
-    
+    //LOGOUT USER
+   func logout(){
+      let storyboard = UIStoryboard(name: "Main", bundle:nil)
+      //view controller currently being set in storyboard as default will be overridden
+      window?.rootViewController = storyboard.instantiateViewController(identifier: "Login")
+   }
     
     
 
